@@ -2,26 +2,27 @@ package main
 
 import "fmt"
 
+func factorial(n int) int {
+	result := 1
+	for i := 2; i <= n; i++ {
+		result *= i
+	}
+	return result
+}
+
+func permutation(n, r int) int {
+	return factorial(n) / factorial(n-r)
+}
+
+func combination(n, r int) int {
+	return factorial(n) / (factorial(r) * factorial(n-r))
+}
+
 func main() {
-	var satu, dua, tiga string
-	var temp string
+	var a, b, c, d int
+	fmt.Scan(&a, &b, &c, &d)
 
-	fmt.Print("Masukan input string: ")
-	fmt.Scanln(&satu)
-
-	fmt.Print("Masukan input string: ")
-	fmt.Scanln(&dua)
-
-	fmt.Print("Masukan input string: ")
-	fmt.Scanln(&tiga)
-
-	fmt.Println("Output awal =", satu, dua, tiga)
-
-	temp = satu
-	satu = dua
-	dua = tiga
-	tiga = temp
-
-	fmt.Println("Output akhir =", satu, dua, tiga)
+	fmt.Println(permutation(a, c), combination(a, c))
+	fmt.Println(combination(b, d))
 }
 

@@ -2,18 +2,36 @@ package main
 
 import "fmt"
 
-func main() {
-	var w1, w2, w3, w4 string
-	berhasil := true
-
-	for i := 1; i <= 5; i++ {
-		fmt.Print("Percobaan ", i, ": ")
-		fmt.Scan(&w1, &w2, &w3, &w4)
-
-		if !(w1 == "merah" && w2 == "kuning" && w3 == "hijau" && w4 == "ungu") {
-			berhasil = false
-		}
-	}
-
-	fmt.Println("BERHASIL:", berhasil)
+func f(x int) int {
+	return x * x
 }
+
+func g(x int) int {
+	return x - 2
+}
+
+func h(x int) int {
+	return x + 1
+}
+
+func fogoh(x int) int {
+	return f(g(h(x)))
+}
+
+func gohof(x int) int {
+	return g(h(f(x)))
+}
+
+func hofog(x int) int {
+	return h(f(g(x)))
+}
+
+func main() {
+	var a, b, c int
+	fmt.Scan(&a, &b, &c)
+
+	fmt.Println(fogoh(a))
+	fmt.Println(gohof(b))
+	fmt.Println(hofog(c))
+}
+

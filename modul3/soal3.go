@@ -1,29 +1,38 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
+
+func jarak(x1, y1, x2, y2 float64) float64 {
+	return math.Sqrt(math.Pow(x1-x2, 2) + math.Pow(y1-y2, 2))
+}
+
+func dalamLingkaran(cx, cy, r, x, y float64) bool {
+	return jarak(cx, cy, x, y) <= r
+}
 
 func main() {
-	var gram int
-	var kg, sisa int
-	var biayaKg, biayaSisa int
+	var cx1, cy1, r1 float64
+	var cx2, cy2, r2 float64
+	var x, y float64
 
-	fmt.Print("Berat parsel (gram): ")
-	fmt.Scanln(&gram)
+	fmt.Scan(&cx1, &cy1, &r1)
+	fmt.Scan(&cx2, &cy2, &r2)
+	fmt.Scan(&x, &y)
 
-	kg = gram / 1000
-	sisa = gram % 1000
+	in1 := dalamLingkaran(cx1, cy1, r1, x, y)
+	in2 := dalamLingkaran(cx2, cy2, r2, x, y)
 
-	biayaKg = kg * 10000
-
-	if sisa >= 500 {
-		biayaSisa = sisa * 5
+	if in1 && in2 {
+		fmt.Println("Titik di dalam lingkaran 1 dan 2")
+	} else if in1 {
+		fmt.Println("Titik di dalam lingkaran 1")
+	} else if in2 {
+		fmt.Println("Titik di dalam lingkaran 2")
 	} else {
-		biayaSisa = sisa * 15
+		fmt.Println("Titik di luar lingkaran 1 dan 2")
 	}
-
-	total := biayaKg + biayaSisa
-
-	fmt.Println("Detail berat:", kg, "kg +", sisa, "gr")
-	fmt.Println("Detail biaya: Rp.", biayaKg, "+ Rp.", biayaSisa)
-	fmt.Println("Total biaya: Rp.", total)
 }
+

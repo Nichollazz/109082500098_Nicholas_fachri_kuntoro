@@ -4,9 +4,16 @@
 ## Unguided 
 
 ### 1. 
-Telusuri program berikut dengan cara mengkompilasi dan mengeksekusi program. Silakan
-masukan data yang sesuai sebanyak yang diminta program. Perhatikan keluaran yang
-diperoleh. Coba terangkan apa sebenarnya yang dilakukan program tersebut?
+Minggu ini, mahasiswa Fakultas Informatika mendapatkan tugas dari mata kuliah matematika
+diskrit untuk mempelajari kombinasi dan permutasi. Jonas salah seorang mahasiswa, iseng
+untuk mengimplementasikannya ke dalam suatu program. Oleh karena itu bersediakah kalian
+membantu Jonas? (tidak tentunya ya :p)
+Masukan terdiri dari empat buah bilangan asli a, b, c, dan d yang dipisahkan oleh spasi,
+dengan syarat a ≥ c dan b ≥ d.
+Keluaran terdiri dari dua baris. Baris pertama adalah hasil permutasi dan kombinasi a
+terhadap c, sedangkan baris kedua adalah hasil permutasi dan kombinasi b terhadap d.
+Catatan: permutasi (P) dan kombinasi (C) dari n terhadap r (n ≥ r) dapat dihitung dengan
+menggunakan persamaan berikut!
 #### soal1.go
 
 ```go
@@ -14,49 +21,46 @@ package main
 
 import "fmt"
 
+func factorial(n int) int {
+	result := 1
+	for i := 2; i <= n; i++ {
+		result *= i
+	}
+	return result
+}
+
+func permutation(n, r int) int {
+	return factorial(n) / factorial(n-r)
+}
+
+func combination(n, r int) int {
+	return factorial(n) / (factorial(r) * factorial(n-r))
+}
+
 func main() {
-	var satu, dua, tiga string
-	var temp string
+	var a, b, c, d int
+	fmt.Scan(&a, &b, &c, &d)
 
-	fmt.Print("Masukan input string: ")
-	fmt.Scanln(&satu)
-
-	fmt.Print("Masukan input string: ")
-	fmt.Scanln(&dua)
-
-	fmt.Print("Masukan input string: ")
-	fmt.Scanln(&tiga)
-
-	fmt.Println("Output awal =", satu, dua, tiga)
-
-	temp = satu
-	satu = dua
-	dua = tiga
-	tiga = temp
-
-	fmt.Println("Output akhir =", satu, dua, tiga)
+	fmt.Println(permutation(a, c), combination(a, c))
+	fmt.Println(combination(b, d))
 }
 
 ```
 ### Output Unguided :
 
 ##### Output 
-![Screenshot Output Unguided 1_1](https://github.com/Nichollazz/109082500098_Nicholas_fachri_kuntoro/blob/main/modul2/output/outputsoal1.png)
-[Program tersebut menerima tiga input string dari pengguna, kemudian menampilkan urutan awalnya. Setelah itu program menukar posisi ketiga string tersebut sehingga urutannya berubah menggunakan variabel sementara.]
+![Screenshot Output Unguided 1_1](https://github.com/Nichollazz/109082500098_Nicholas_fachri_kuntoro/blob/main/modul3/output/outputsoal1.png)
+[Program ini menghitung permutasi dan kombinasi menggunakan fungsi faktorial. Input berupa empat bilangan (a, b, c, d), lalu menghasilkan permutasi dan kombinasi dari a terhadap c, serta kombinasi dari b terhadap d.]
 
 ### 2. 
-Siswa kelas IPA di salah satu sekolah menengah atas di Indonesia sedang mengadakan
-praktikum kimia. Di setiap percobaan akan menggunakan 4 tabung reaksi, yang mana
-susunan warna cairan di setiap tabung akan menentukan hasil percobaan. Siswa diminta
-untuk mencatat hasil percobaan tersebut. Percobaan dikatakan berhasil apabila susunan
-warna zat cair pada gelas 1 hingga gelas 4 secara berturutan adalah ‘merah’, ‘kuning’,
-‘hijau’, dan ‘ungu’ selama 5 kali percobaan berulang.
-Buatlah sebuah program yang menerima input berupa warna dari ke 4 gelas reaksi
-sebanyak 5 kali percobaan. Kemudian program akan menampilkan true apabila urutan
-warna sesuai dengan informasi yang diberikan pada paragraf sebelumnya, dan false
-untuk urutan warna lainnya.
-Perhatikan contoh sesi interaksi program seperti di bawah ini (teks bergaris bawah
-adalah input/read):
+Diberikan tiga buah fungsi matematika yaitu f (x) = x
+2
+, g (x) = x − 2 dan h (x) = x +
+Fungsi komposisi (fogoh)(x) artinya adalah f(g(h(x))). Tuliskan f(x), g(x) dan h(x)
+dalam bentuk function.
+Masukan terdiri dari sebuah bilangan bulat a, b dan c yang dipisahkan oleh spasi.
+Keluaran terdiri dari tiga baris. Baris pertama adalah (fogoh)(a), baris kedua (gohof)(b),
+dan baris ketiga adalah (hofog)(c)!
 #### soal2.go
 
 ```go
@@ -64,74 +68,102 @@ package main
 
 import "fmt"
 
-func main() {
-	var w1, w2, w3, w4 string
-	berhasil := true
-
-	for i := 1; i <= 5; i++ {
-		fmt.Print("Percobaan ", i, ": ")
-		fmt.Scan(&w1, &w2, &w3, &w4)
-
-		if !(w1 == "merah" && w2 == "kuning" && w3 == "hijau" && w4 == "ungu") {
-			berhasil = false
-		}
-	}
-
-	fmt.Println("BERHASIL:", berhasil)
+func f(x int) int {
+	return x * x
 }
+
+func g(x int) int {
+	return x - 2
+}
+
+func h(x int) int {
+	return x + 1
+}
+
+func fogoh(x int) int {
+	return f(g(h(x)))
+}
+
+func gohof(x int) int {
+	return g(h(f(x)))
+}
+
+func hofog(x int) int {
+	return h(f(g(x)))
+}
+
+func main() {
+	var a, b, c int
+	fmt.Scan(&a, &b, &c)
+
+	fmt.Println(fogoh(a))
+	fmt.Println(gohof(b))
+	fmt.Println(hofog(c))
+}
+
 
 ```
 ### Output Unguided :
 
 ##### Output 
-![Screenshot Output Unguided 1_1](https://github.com/Nichollazz/109082500098_Nicholas_fachri_kuntoro/blob/main/modul2/output/outputsoal2.png)
-[Program tersebut melakukan lima kali percobaan dengan memasukkan empat warna setiap percobaan. Program memeriksa apakah urutan warna adalah merah, kuning, hijau, ungu. Jika semua percobaan benar maka hasilnya true, jika ada yang salah maka false.]
+![Screenshot Output Unguided 1_1](https://github.com/Nichollazz/109082500098_Nicholas_fachri_kuntoro/blob/main/modul3/output/outputsoal2.png)
+[Program ini menghitung komposisi dari tiga fungsi f(x)=x², g(x)=x−2, dan h(x)=x+1. Input tiga bilangan (a, b, c), kemudian menampilkan hasil fogoh(a), gohof(b), dan hofog(c).]
 
 ### 3. 
-PT POS membutuhkan aplikasi perhitungan biaya kirim berdasarkan berat parsel. Maka,
-buatlah program BiayaPos untuk menghitung biaya pengiriman tersebut dengan ketentuan
-sebagai berikut!
-Dari berat parsel (dalam gram), harus dihitung total berat dalam kg dan sisanya (dalam
-gram). Biaya jasa pengiriman adalah Rp. 10.000,- per kg. Jika sisa berat tidak kurang dari 500
-gram, maka tambahan biaya kirim hanya Rp. 5,- per gram saja. Tetapi jika kurang dari 500
-gram, maka tambahan biaya akan dibebankan sebesar Rp. 15,- per gram. Sisa berat (yang
-kurang dari 1kg) digratiskan biayanya apabila total berat ternyata lebih dari 10kg.
+Suatu lingkaran didefinisikan dengan koordinat titik pusat (cx, cy) dengan radius
+r. Apabila diberikan dua buah lingkaran, maka tentukan posisi sebuah titik sembarang (x, y)
+berdasarkan dua lingkaran tersebut.
+Masukan terdiri dari beberapa tiga baris. Baris pertama dan kedua adalah koordinat titik pusat
+dan radius dari lingkaran 1 dan lingkaran 2, sedangkan baris ketiga adalah koordinat titik
+sembarang. Asumsi sumbu x dan y dari semua titik dan juga radius direpresentasikan dengan
+bilangan bulat.
+Keluaran berupa string yang menyatakan posisi titik "Titik di dalam lingkaran 1 dan 2", "Titik
+di dalam lingkaran 1", "Titik di dalam lingkaran 2", atau "Titik di luar lingkaran 1 dan 2".
 #### soal3.go
 
 ```go
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
+
+func jarak(x1, y1, x2, y2 float64) float64 {
+	return math.Sqrt(math.Pow(x1-x2, 2) + math.Pow(y1-y2, 2))
+}
+
+func dalamLingkaran(cx, cy, r, x, y float64) bool {
+	return jarak(cx, cy, x, y) <= r
+}
 
 func main() {
-	var gram int
-	var kg, sisa int
-	var biayaKg, biayaSisa int
+	var cx1, cy1, r1 float64
+	var cx2, cy2, r2 float64
+	var x, y float64
 
-	fmt.Print("Berat parsel (gram): ")
-	fmt.Scanln(&gram)
+	fmt.Scan(&cx1, &cy1, &r1)
+	fmt.Scan(&cx2, &cy2, &r2)
+	fmt.Scan(&x, &y)
 
-	kg = gram / 1000
-	sisa = gram % 1000
+	in1 := dalamLingkaran(cx1, cy1, r1, x, y)
+	in2 := dalamLingkaran(cx2, cy2, r2, x, y)
 
-	biayaKg = kg * 10000
-
-	if sisa >= 500 {
-		biayaSisa = sisa * 5
+	if in1 && in2 {
+		fmt.Println("Titik di dalam lingkaran 1 dan 2")
+	} else if in1 {
+		fmt.Println("Titik di dalam lingkaran 1")
+	} else if in2 {
+		fmt.Println("Titik di dalam lingkaran 2")
 	} else {
-		biayaSisa = sisa * 15
+		fmt.Println("Titik di luar lingkaran 1 dan 2")
 	}
-
-	total := biayaKg + biayaSisa
-
-	fmt.Println("Detail berat:", kg, "kg +", sisa, "gr")
-	fmt.Println("Detail biaya: Rp.", biayaKg, "+ Rp.", biayaSisa)
-	fmt.Println("Total biaya: Rp.", total)
 }
+
 
 ```
 ### Output Unguided :
 
 ##### Output 
-![Screenshot Output Unguided 1_1](https://github.com/Nichollazz/109082500098_Nicholas_fachri_kuntoro/blob/main/modul2/output/outputsoal3.png)
-[Program tersebut menghitung biaya pengiriman parsel berdasarkan berat dalam gram. Berat diubah menjadi kilogram dan sisa gram, kemudian biaya dihitung dari tarif per kilogram dan tambahan biaya dari sisa gram, lalu ditampilkan total biayanya.]
+![Screenshot Output Unguided 1_1](https://github.com/Nichollazz/109082500098_Nicholas_fachri_kuntoro/blob/main/modul3/output/outputsoal3.png)
+[Program ini menentukan posisi sebuah titik terhadap dua lingkaran dengan menghitung jarak titik ke pusat lingkaran. Output menunjukkan apakah titik berada di dalam salah satu, keduanya, atau di luar kedua lingkaran.]
